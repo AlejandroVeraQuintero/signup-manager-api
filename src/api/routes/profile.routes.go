@@ -7,8 +7,8 @@ import (
 )
 
 func ProfileRoutes(router *gin.Engine) {
-	router.GET(constants.ApiVersionPath+"/profiles", controllers.GetAllProfiles)
-	router.POST(constants.ApiVersionPath+"/profile", controllers.AddProfile)
-	router.GET(constants.ApiVersionPath+"/profile/:id", controllers.GetByIdProfile)
-	router.DELETE(constants.ApiVersionPath+"/profile/:id", controllers.DeleteProfile)
+	router.GET(constants.ApiVersionOnePath+"/profiles", controllers.GetAllProfiles)
+	router.POST(constants.ApiVersionOnePath+"/profile", controllers.AddProfile)
+	router.GET(constants.ApiVersionOnePath+"/profile/:id", controllers.GetByIdProfile)
+	router.DELETE(constants.ApiVersionOnePath+"/profile/:id", controllers.DeleteProfile)
 }
