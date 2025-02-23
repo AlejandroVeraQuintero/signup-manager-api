@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"os"
 
 	constants "github.com/AlejandroVeraQuintero/signup-manager-api/src/api/constants"
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/middlewares"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/routes"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/message"
 	"github.com/gin-gonic/gin"
@@ -16,15 +17,17 @@ func main() {
 
 	err := godotenv.Load(constants.PathFileEnv)
 	if err != nil {
-		fmt.Println(message.ErrorLoadingEnv, err)
+		log.Println(message.ErrorLoadingEnv, err)
 	}
 
+	router.Use(middlewares.LogErrorRequest())
+	router.Use(middlewares.LogSuccessRequest())
 	routes.InitRoutes(router)
 
 	if err := router.Run(":" + os.Getenv(constants.KeyPort)); err != nil {
-		fmt.Println(message.ErrorRunningServer, err)
+		log.Println(message.ErrorRunningServer, err)
 	} else {
-		fmt.Println(message.StartRunningServer)
+		log.Println(message.StartRunningServer)
 	}
 
 }
