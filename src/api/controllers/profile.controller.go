@@ -7,6 +7,7 @@ import (
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/commands/deleteProfile"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/dtos"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/queries/getByIdProfile"
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/queries/getListProfiles"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/domain/profiles/models"
 	"github.com/gin-gonic/gin"
 	"github.com/mehdihadeli/go-mediatr"
@@ -18,7 +19,13 @@ import (
 // @Tags			profiles
 // @Router			/profiles [get]
 func GetAllProfiles(context *gin.Context) {
-	context.IndentedJSON(http.StatusOK, gin.H{"message": "GetAllProfiles"})
+	var query *getListProfiles.GetListProfilesQuery = &getListProfiles.GetListProfilesQuery{}
+	response, err := mediatr.Send[*getListProfiles.GetListProfilesQuery, *[]models.Profile](context, query)
+	if err != nil {
+		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+	}
+
+	context.IndentedJSON(http.StatusOK, response)
 }
 
 // GetByIdUser 			godoc
@@ -29,8 +36,8 @@ func GetAllProfiles(context *gin.Context) {
 // @Tags				profiles
 // @Router				/profile/{id} [get]
 func GetByIdProfile(context *gin.Context) {
-	var command *getByIdProfile.GetByIdProfileQuery = &getByIdProfile.GetByIdProfileQuery{Id: context.Param("id")}
-	response, err := mediatr.Send[*getByIdProfile.GetByIdProfileQuery, *models.Profile](context, command)
+	var query *getByIdProfile.GetByIdProfileQuery = &getByIdProfile.GetByIdProfileQuery{Id: context.Param("id")}
+	response, err := mediatr.Send[*getByIdProfile.GetByIdProfileQuery, *models.Profile](context, query)
 	if err != nil {
 		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 	}
