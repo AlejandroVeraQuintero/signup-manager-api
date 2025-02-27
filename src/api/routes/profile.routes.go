@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/constants"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/controllers"
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/constants"
 	"github.com/gin-gonic/gin"
 )
 

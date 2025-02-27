@@ -1,4 +1,4 @@
-package addprofile
+package addProfile
 
 import (
 	"context"
@@ -12,7 +12,11 @@ type AddProfileHandler struct {
 	addProfileService *services.AddProfileService
 }
 
-func (handler *AddProfileHandler) Handler(context context.Context, command *AddProfileCommand) (*dtos.AddProfileDto, error) {
+func NewAddProfileHandler(addProfileService *services.AddProfileService) *AddProfileHandler {
+	return &AddProfileHandler{addProfileService: addProfileService}
+}
+
+func (handler *AddProfileHandler) Handle(context context.Context, command *AddProfileCommand) (*dtos.AddProfileDto, error) {
 	var newProfile models.Profile = models.Profile{
 		Email:     command.Email,
 		FirstName: command.FirstName,

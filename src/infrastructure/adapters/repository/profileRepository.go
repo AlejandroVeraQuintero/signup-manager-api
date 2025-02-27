@@ -36,7 +36,7 @@ func (repository *ProfileRepository) FindAll() ([]models.Profile, error) {
 func (repository *ProfileRepository) FindById(id string) (models.Profile, error) {
 
 	var profileEntity entity.ProfileEntity
-	if err := repository.Connection.First(&profileEntity, id).Error; err != nil {
+	if err := repository.Connection.Where("id = ?", id).First(&profileEntity).Error; err != nil {
 		return models.Profile{}, fmt.Errorf("error finding profile: %w", err)
 	}
 	var profile models.Profile = mapper.ProfileEntityToProfile(profileEntity)
@@ -59,7 +59,7 @@ func (repository *ProfileRepository) Delete(id string) error {
 		return err
 	}
 
-	if err := repository.Connection.Delete(&entity.ProfileEntity{}, id).Error; err != nil {
+	if err := repository.Connection.Where("id = ?", id).Delete(&entity.ProfileEntity{}).Error; err != nil {
 		return fmt.Errorf("error deleting profile: %w", err)
 	}
 

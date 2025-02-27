@@ -4,9 +4,10 @@ import (
 	"log"
 	"os"
 
-	constants "github.com/AlejandroVeraQuintero/signup-manager-api/src/api/constants"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/middlewares"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/routes"
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/constants"
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/containers"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/message"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -20,6 +21,7 @@ func main() {
 		log.Println(message.ErrorLoadingEnv, err)
 	}
 
+	containers.RegisterMediators()
 	router.Use(middlewares.LogErrorRequest())
 	router.Use(middlewares.LogSuccessRequest())
 	routes.InitRoutes(router)
