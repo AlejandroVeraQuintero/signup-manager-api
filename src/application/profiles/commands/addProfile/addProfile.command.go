@@ -1,4 +1,4 @@
-package addprofile
+package addProfile
 
 type AddProfileCommand struct {
 	FirstName string `json:"first_name" validate:"required"`
