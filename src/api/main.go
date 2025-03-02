@@ -6,9 +6,9 @@ import (
 
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/middlewares"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/routes"
-	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/constants"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/containers"
-	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/message"
+	constants "github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/resources"
+	message "github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/resources"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )

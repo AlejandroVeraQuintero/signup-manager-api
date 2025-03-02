@@ -1,4 +1,4 @@
-package message
+package resources
 
 const ErrorLoadingEnv string = "Error loading .env file"
 const ErrorRunningServer string = "Error running server"
@@ -10,4 +10,3 @@ const MessageExceptionRequest string = "An error occurred  {Method} {Path} {Stat
 const MessageDisplayError string = "Error : "
 
 const MessageFailConnectionDb string = "failed to connect database: %v"
-const MessageConnectionDb string = "Connection to database established"

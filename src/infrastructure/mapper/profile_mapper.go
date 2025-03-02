@@ -14,7 +14,9 @@ func ProfileToProfileEntity(profile models.Profile) entity.ProfileEntity {
 	profileEntity.Email = profile.Email
 	profileEntity.Age = profile.Age
 	profileEntity.Job = profile.Job
-
+	profileEntity.CreatedAt = profile.CreatedAt
+	profileEntity.UpdatedAt = profile.UpdatedAt
+	profileEntity.StateEntity = profile.StateEntity
 	return profileEntity
 }
 
@@ -26,6 +28,9 @@ func ProfileEntityToProfile(profileEntity entity.ProfileEntity) models.Profile {
 	profile.Email = profileEntity.Email
 	profile.Age = profileEntity.Age
 	profile.Job = profileEntity.Job
+	profile.CreatedAt = profileEntity.CreatedAt
+	profile.UpdatedAt = profileEntity.UpdatedAt
+	profile.StateEntity = profileEntity.StateEntity
 	return profile
 }
 

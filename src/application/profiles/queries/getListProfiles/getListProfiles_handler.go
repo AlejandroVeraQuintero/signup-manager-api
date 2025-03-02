@@ -3,6 +3,7 @@ package getListProfiles
 import (
 	"context"
 
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/dtos"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/domain/profiles/models"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/domain/profiles/ports"
 )
@@ -15,7 +16,7 @@ func NewGetListProfilesHandler(profileRepository ports.IProfileRepository) *GetL
 	return &GetListProfilesHandler{profileRepository: profileRepository}
 }
 
-func (handler *GetListProfilesHandler) Handle(context context.Context, query *GetListProfilesQuery) (*[]models.Profile, error) {
+func (handler *GetListProfilesHandler) Handle(context context.Context, query *GetListProfilesQuery) ([]dtos.ProfileDto, error) {
 	var err error
 	var profiles []models.Profile
 
@@ -25,5 +26,5 @@ func (handler *GetListProfilesHandler) Handle(context context.Context, query *Ge
 		return nil, err
 	}
 
-	return &profiles, err
+	return dtos.ProfilesModelToProfilesDto(profiles), err
 }

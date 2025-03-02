@@ -11,7 +11,7 @@ func LogErrorRequest() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		context.Next()
 		if context.Writer.Status() == http.StatusBadRequest {
-			utils.CreateLogErrorRequest(context)
+			utils.GenerateLogErrorRequest(context)
 		}
 	}
 }
