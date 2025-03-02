@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/api/controllers"
-	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/constants"
+	constants "github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/resources"
 	"github.com/gin-gonic/gin"
 )
 

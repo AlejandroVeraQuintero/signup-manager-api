@@ -11,7 +11,7 @@ func LogSuccessRequest() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		context.Next()
 		if context.Writer.Status() == http.StatusOK {
-			utils.CreateLogSuccessRequest(context)
+			utils.GenerateLogSuccessRequest(context)
 		}
 	}
 }

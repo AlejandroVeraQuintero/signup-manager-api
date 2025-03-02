@@ -1,4 +1,4 @@
-package constants
+package resources
 
 const KeyPort string = "PORT"
 const PathFileEnv string = "src/api/.env"
