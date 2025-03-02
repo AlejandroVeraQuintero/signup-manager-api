@@ -37,7 +37,7 @@ func (repository *ProfileRepository) FindById(id string) (models.Profile, error)
 
 	var profileEntity entity.ProfileEntity
 	if err := repository.Connection.Where("id = ?", id).First(&profileEntity).Error; err != nil {
-		return models.Profile{}, fmt.Errorf("error finding profile: %w", err)
+		return models.Profile{}, errors.New(fmt.Sprintf("error finding profile: %s", err))
 	}
 	var profile models.Profile = mapper.ProfileEntityToProfile(profileEntity)
 	return profile, nil
@@ -46,22 +46,15 @@ func (repository *ProfileRepository) FindById(id string) (models.Profile, error)
 func (repository *ProfileRepository) Add(profile models.Profile) (string, error) {
 	var profileEntity entity.ProfileEntity = mapper.ProfileToProfileEntity(profile)
 	if err := repository.Connection.Create(&profileEntity).Error; err != nil {
-		return "", fmt.Errorf("error creating profile: %w", err)
+		return "", errors.New(fmt.Sprintf("error creating profile: %s", err))
 	}
 	return profileEntity.Id, nil
 }
 
 func (repository *ProfileRepository) Delete(id string) error {
 	var err error
-	_, err = repository.FindById(id)
-
-	if err != nil {
-		return err
+	if err = repository.Connection.Where("id = ?", id).Delete(&entity.ProfileEntity{}).Error; err != nil {
+		return errors.New(fmt.Sprintf("error deleting profile: %s", err))
 	}
-
-	if err := repository.Connection.Where("id = ?", id).Delete(&entity.ProfileEntity{}).Error; err != nil {
-		return fmt.Errorf("error deleting profile: %w", err)
-	}
-
 	return nil
 }

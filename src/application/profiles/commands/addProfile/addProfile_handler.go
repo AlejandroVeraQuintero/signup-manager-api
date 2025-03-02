@@ -16,7 +16,7 @@ func NewAddProfileHandler(addProfileService *services.AddProfileService) *AddPro
 	return &AddProfileHandler{addProfileService: addProfileService}
 }
 
-func (handler *AddProfileHandler) Handle(context context.Context, command *AddProfileCommand) (*dtos.AddProfileDto, error) {
+func (handler *AddProfileHandler) Handle(context context.Context, command *AddProfileCommand) (dtos.AddProfileDto, error) {
 	var newProfile models.Profile = models.Profile{
 		Email:     command.Email,
 		FirstName: command.FirstName,
@@ -28,10 +28,10 @@ func (handler *AddProfileHandler) Handle(context context.Context, command *AddPr
 	profile, err := handler.addProfileService.Add(newProfile)
 
 	if err != nil {
-		return nil, err
+		return dtos.AddProfileDto{}, err
 	}
 
-	response := &dtos.AddProfileDto{Id: profile.Id, Email: profile.Email}
+	response := dtos.AddProfileDto{Id: profile.Id, Email: profile.Email}
 
 	return response, err
 }

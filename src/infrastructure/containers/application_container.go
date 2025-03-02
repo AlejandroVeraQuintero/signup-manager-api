@@ -10,7 +10,7 @@ import (
 
 func RegisterMediators() {
 	mediatr.RegisterRequestHandler(addProfile.NewAddProfileHandler(GetAddProfileService()))
-	mediatr.RegisterRequestHandler(deleteProfile.NewDeleteProfileHandler(GetProfileRepository()))
+	mediatr.RegisterRequestHandler(deleteProfile.NewDeleteProfileHandler(GetDeleteProfileService()))
 	mediatr.RegisterRequestHandler(getByIdProfile.NewGetByIdProfileHandler(GetProfileRepository()))
 	mediatr.RegisterRequestHandler(getListProfiles.NewGetListProfilesHandler(GetProfileRepository()))
 }

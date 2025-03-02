@@ -7,3 +7,9 @@ func GetAddProfileService() *services.AddProfileService {
 		ProfileRepository: GetProfileRepository(),
 	}
 }
+
+func GetDeleteProfileService() *services.DeleteProfileService {
+	return &services.DeleteProfileService{
+		ProfileRepository: GetProfileRepository(),
+	}
+}

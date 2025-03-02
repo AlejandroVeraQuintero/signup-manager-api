@@ -74,7 +74,7 @@ func GetByIdProfile(context *gin.Context) {
 func AddProfile(context *gin.Context) {
 	var command *addProfile.AddProfileCommand
 	context.BindJSON(&command)
-	response, err := mediatr.Send[*addProfile.AddProfileCommand, *dtos.AddProfileDto](context, command)
+	response, err := mediatr.Send[*addProfile.AddProfileCommand, dtos.AddProfileDto](context, command)
 
 	if err != nil {
 		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
@@ -98,7 +98,7 @@ func AddProfile(context *gin.Context) {
 // @Router       /profile/{id} [delete]
 func DeleteProfile(context *gin.Context) {
 	var command *deleteProfile.DeleteProfileCommand = &deleteProfile.DeleteProfileCommand{Id: context.Param("id")}
-	response, err := mediatr.Send[*deleteProfile.DeleteProfileCommand, *dtos.DeleteProfileDto](context, command)
+	response, err := mediatr.Send[*deleteProfile.DeleteProfileCommand, dtos.DeleteProfileDto](context, command)
 
 	if err != nil {
 		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
