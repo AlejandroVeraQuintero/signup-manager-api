@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/migrations"
 	constants "github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/resources"
 	message "github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/resources"
 	"gorm.io/driver/postgres"
@@ -22,7 +23,7 @@ func GetDatabaseInstance() *gorm.DB {
 		log.Fatalf(message.MessageFailConnectionDb, err)
 	}
 
-	migrateDatabase(dbConnection)
+	migrations.ApplyMigrations(dbConnection)
 
 	return dbConnection
 }
