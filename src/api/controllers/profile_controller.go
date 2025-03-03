@@ -1,13 +1,12 @@
 package controllers
 
 import (
-	"net/http"
-
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/commands/addProfile"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/commands/deleteProfile"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/dtos"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/queries/getByIdProfile"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/application/profiles/queries/getListProfiles"
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/infrastructure/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/mehdihadeli/go-mediatr"
 )
@@ -26,12 +25,7 @@ import (
 func GetAllProfiles(context *gin.Context) {
 	var query *getListProfiles.GetListProfilesQuery = &getListProfiles.GetListProfilesQuery{}
 	response, err := mediatr.Send[*getListProfiles.GetListProfilesQuery, []dtos.ProfileDto](context, query)
-
-	if err != nil {
-		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-	}
-
-	context.IndentedJSON(http.StatusOK, response)
+	utils.HandleResponse(context, response, err)
 }
 
 // GetByIdProfile godoc
@@ -50,12 +44,7 @@ func GetAllProfiles(context *gin.Context) {
 func GetByIdProfile(context *gin.Context) {
 	var query *getByIdProfile.GetByIdProfileQuery = &getByIdProfile.GetByIdProfileQuery{Id: context.Param("id")}
 	response, err := mediatr.Send[*getByIdProfile.GetByIdProfileQuery, dtos.ProfileDto](context, query)
-
-	if err != nil {
-		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-	}
-
-	context.IndentedJSON(http.StatusOK, response)
+	utils.HandleResponse(context, response, err)
 }
 
 // AddProfile godoc
@@ -75,12 +64,7 @@ func AddProfile(context *gin.Context) {
 	var command *addProfile.AddProfileCommand
 	context.BindJSON(&command)
 	response, err := mediatr.Send[*addProfile.AddProfileCommand, dtos.AddProfileDto](context, command)
-
-	if err != nil {
-		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-	}
-
-	context.IndentedJSON(http.StatusOK, response)
+	utils.HandleResponse(context, response, err)
 }
 
 // DeleteProfile godoc
@@ -99,10 +83,5 @@ func AddProfile(context *gin.Context) {
 func DeleteProfile(context *gin.Context) {
 	var command *deleteProfile.DeleteProfileCommand = &deleteProfile.DeleteProfileCommand{Id: context.Param("id")}
 	response, err := mediatr.Send[*deleteProfile.DeleteProfileCommand, dtos.DeleteProfileDto](context, command)
-
-	if err != nil {
-		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-	}
-
-	context.IndentedJSON(http.StatusOK, response)
+	utils.HandleResponse(context, response, err)
 }

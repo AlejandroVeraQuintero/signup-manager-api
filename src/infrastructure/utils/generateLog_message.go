@@ -15,7 +15,7 @@ const stringStatusCode = "{StatusCode}"
 
 func GenerateLogSuccessRequest(context *gin.Context) {
 	log.Println(message.StringSeparator)
-	log.Println(FormatMessageRequestLog(message.MessageSuccessRequest,
+	log.Println(FormatMessageRequestLog(message.SuccessRequest,
 		context.Request.Method,
 		context.Request.URL.Path, context.Writer.Status()))
 	log.Println(message.StringSeparator)
@@ -23,10 +23,10 @@ func GenerateLogSuccessRequest(context *gin.Context) {
 
 func GenerateLogErrorRequest(context *gin.Context) {
 	log.Println(message.StringSeparator)
-	log.Println(FormatMessageRequestLog(message.MessageExceptionRequest,
+	log.Println(FormatMessageRequestLog(message.ErrorRequest,
 		context.Request.Method,
 		context.Request.URL.Path, context.Writer.Status()))
-	log.Println(message.MessageDisplayError + context.Errors.String())
+	log.Println(message.DisplayError + context.Errors.String())
 	log.Println(message.StringSeparator)
 }
 

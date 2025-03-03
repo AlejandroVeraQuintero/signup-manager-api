@@ -1,6 +1,7 @@
 package services
 
 import (
+	"github.com/AlejandroVeraQuintero/signup-manager-api/src/domain/common/enums"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/domain/profiles/models"
 	"github.com/AlejandroVeraQuintero/signup-manager-api/src/domain/profiles/ports"
 )
@@ -10,6 +11,7 @@ type AddProfileService struct {
 }
 
 func (service *AddProfileService) Add(profile models.Profile) (models.Profile, error) {
+	profile.State = enums.Pending
 	id, err := service.ProfileRepository.Add(profile)
 	if err != nil {
 		return models.Profile{}, err
