@@ -20,7 +20,7 @@ func GetDatabaseInstance() *gorm.DB {
 	dbConnection, err := gorm.Open(postgres.Open(connectionString), &gorm.Config{})
 
 	if err != nil {
-		log.Fatalf(message.MessageFailConnectionDb, err)
+		log.Fatalf(message.ErrorConnectionDb, err)
 	}
 
 	migrations.ApplyMigrations(dbConnection)

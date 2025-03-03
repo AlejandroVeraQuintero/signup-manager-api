@@ -3,12 +3,13 @@ package dtos
 import "github.com/AlejandroVeraQuintero/signup-manager-api/src/domain/profiles/models"
 
 type ProfileDto struct {
-	Id        string
-	FirstName string
-	LastName  string
-	Email     string
-	Age       int64
-	Job       string
+	Id        string `json:"id"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	Age       int64  `json:"age"`
+	Job       string `json:"job"`
+	State     string `json:"state"`
 }
 
 func ProfileModelToProfileDto(profile models.Profile) ProfileDto {
@@ -19,6 +20,7 @@ func ProfileModelToProfileDto(profile models.Profile) ProfileDto {
 		Email:     profile.Email,
 		Age:       profile.Age,
 		Job:       profile.Job,
+		State:     profile.State,
 	}
 	return profileDto
 }
